@@ -6,6 +6,7 @@ import { MantineProvider } from "@mantine/core";
 
 const libreFranklin = Libre_Franklin({
   variable: "--font-libre-franklin",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
