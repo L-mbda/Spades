@@ -1,7 +1,7 @@
 "use client";
 import { useDisclosure } from '@mantine/hooks';
 import { Button, Modal, NumberInput, Select, Table, TextInput } from '@mantine/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocalstorageState } from 'rooks';
 import { EndSession } from './components/endSession';
 
@@ -32,8 +32,9 @@ export default function Home() {
   const [winner, setWinner] = useLocalstorageState<string>('winner', 'no one');
 
   function findWinner() {
+    if (sessionData === undefined) return;
     let teamData = sessionData.teamData;
-    let winningPoints = -10000;
+    let winningPoints = -Infinity;
     let winningTeam = '';
     teamData.forEach((team) => {
       let points = gameStore.gameInfo.filter((data) => data.team == team).length == 0 ? 0 : gameStore.gameInfo.filter((data) => data.team == team).map((data) => {
@@ -46,6 +47,10 @@ export default function Home() {
      });
      setWinner(winningTeam);
   }
+
+  useEffect(() => {
+    findWinner();
+  }, [gameStore.gameInfo]);
 
   if (sessionData === undefined || sessionData.gameOver) {
     return (
@@ -121,7 +126,7 @@ export default function Home() {
         {/* Table */}
         <div className="overflow-x-auto w-full">
           <Table className="table-auto w-full" withColumnBorders>
-            <Table.Thead>
+            <Table.Thead className='w-[80%]'>
               <Table.Tr>
                 <Table.Td>
                   Rounds
@@ -133,7 +138,7 @@ export default function Home() {
                 }
               </Table.Tr>
             </Table.Thead>
-            <Table.Tbody>
+            <Table.Tbody className='w-[80%]'>
               {
                 Array.from({ length: 13 }, (a, i) => (
                   <Table.Tr key={i}>
@@ -142,7 +147,7 @@ export default function Home() {
                     </Table.Td>
                     {
                       sessionData.teamData.map((team, index) => (
-                        <Table.Td key={index} className='min-w-[40vw] md:min-w-[20vw]'>
+                        <Table.Td key={index} className='min-w-[40vw] md:min-w-[10vw]'>
                           <div className='flex flex-col gap-2'>
                             <NumberInput id={`${i}-${team}-games_bet`} onChange={(value) => {
                               let gameStoreData = gameStore.gameInfo;
@@ -288,7 +293,7 @@ export default function Home() {
                             }} placeholder='Games Won' label="Games won" min={0}
                             
                             defaultValue={
-                              (gameStore.gameInfo.find((data) => data.roundNumber === (i + 1) && data.team === team) || { gamesBet: 0 }).gamesBet
+                              (gameStore.gameInfo.find((data) => data.roundNumber === (i + 1) && data.team === team) || { gamesWon: 0 }).gamesWon
                             } />
 
                             <p>Points Won: {
