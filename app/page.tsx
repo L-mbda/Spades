@@ -142,7 +142,7 @@ export default function Home() {
                     </Table.Td>
                     {
                       sessionData.teamData.map((team, index) => (
-                        <Table.Td key={index}>
+                        <Table.Td key={index} className='min-w-[40vw] md:min-w-[20vw]'>
                           <div className='flex flex-col gap-2'>
                             <NumberInput id={`${i}-${team}-games_bet`} onChange={(value) => {
                               let gameStoreData = gameStore.gameInfo;
