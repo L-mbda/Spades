@@ -99,8 +99,8 @@ export default function Home() {
                   sessionName: e.target["session_name"].value,
                   teamData: teamData,
                   teamCount: teamCount,
-                  // @ts-ignore
                   gameType:
+                    // @ts-ignore
                     e.target["game_type"].value == "Normal"
                       ? "normal"
                       : "penalty",
@@ -225,8 +225,10 @@ export default function Home() {
                               let bet = parseInt(value);
                               // @ts-ignore
                               let won = parseInt(
+                                // @ts-ignore
                                 document.getElementById(
                                   `${i}-${team}-games_won`,
+                                  // @ts-ignore
                                 ).value,
                               );
                               if (won > bet) {
@@ -241,8 +243,10 @@ export default function Home() {
                               let bet = parseInt(value);
                               // @ts-ignore
                               let won = parseInt(
+                                // @ts-ignore
                                 document.getElementById(
                                   `${i}-${team}-games_won`,
+                                  // @ts-ignore
                                 ).value,
                               );
                               if (won > bet) {
@@ -265,8 +269,10 @@ export default function Home() {
                                   gamesBet: parseInt(value),
                                   // @ts-ignore
                                   gamesWon: parseInt(
+                                    // @ts-expect-error Expecting ts
                                     document.getElementById(
                                       `${i}-${team}-games_won`,
+                                      // @ts-expect-error Expecting ts
                                     ).value,
                                   ),
                                   roundNumber: i + 1,
@@ -280,6 +286,7 @@ export default function Home() {
                             // @ts-ignore
                             if (
                               gameData.length == 0 ||
+                              // @ts-expect-error Expecting ts
                               gameData.every(
                                 (data) =>
                                   data.roundNumber !== i + 1 ||
@@ -292,8 +299,10 @@ export default function Home() {
                                 gamesBet: parseInt(value),
                                 // @ts-ignore
                                 gamesWon: parseInt(
+                                  // @ts-expect-error Expecting ts
                                   document.getElementById(
                                     `${i}-${team}-games_won`,
+                                    // @ts-expect-error Expecting ts
                                   ).value,
                                 ),
                                 roundNumber: i + 1,
@@ -333,8 +342,10 @@ export default function Home() {
                             if (sessionData.gameType == "normal") {
                               // @ts-ignore
                               let bet = parseInt(
+                                // @ts-expect-error Expecting ts
                                 document.getElementById(
                                   `${i}-${team}-games_bet`,
+                                  // @ts-expect-error Expecting ts
                                 ).value,
                               );
                               // @ts-ignore
@@ -349,8 +360,10 @@ export default function Home() {
                             } else {
                               // @ts-ignore
                               let bet = parseInt(
+                                // @ts-expect-error Expecting ts
                                 document.getElementById(
                                   `${i}-${team}-games_bet`,
+                                  // @ts-expect-error Expecting ts
                                 ).value,
                               );
                               // @ts-ignore
@@ -373,8 +386,10 @@ export default function Home() {
                                   team: team,
                                   // @ts-ignore
                                   gamesBet: parseInt(
+                                    // @ts-expect-error Expecting ts
                                     document.getElementById(
                                       `${i}-${team}-games_bet`,
+                                      // @ts-expect-error Expecting ts
                                     ).value,
                                   ),
                                   // @ts-ignore
@@ -390,6 +405,7 @@ export default function Home() {
                             // @ts-ignore
                             if (
                               gameData.length == 0 ||
+                              // @ts-expect-error Expecting ts
                               gameData.every(
                                 (data) =>
                                   data.roundNumber !== i + 1 ||
@@ -402,8 +418,10 @@ export default function Home() {
                                 gamesBet: parseInt(value),
                                 // @ts-ignore
                                 gamesWon: parseInt(
+                                  // @ts-expect-error Expecting ts
                                   document.getElementById(
                                     `${i}-${team}-games_won`,
+                                    // @ts-expect-error Expecting ts
                                   ).value,
                                 ),
                                 roundNumber: i + 1,
